@@ -13,3 +13,10 @@
 .title {
   color: #fff;
 }
+.navbar .btn-link:hover, .navbar-brand:hover {
+  color: #fff;
+}
+
+.btn-link:hover {
+  color: #fff;
+}
