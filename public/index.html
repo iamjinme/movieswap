@@ -23,21 +23,8 @@
 			<a href="/login" class="btn btn-link"><i class="fa fa-user"></i> Login</a>
 		</section>
 	</header>
-	<body>
-		<div class="container main">
-			<img src="/public/img/logo.png" />
-			<h2 class="title">MovieSw<i class="fa fa-refresh"></i>p</h2>
-			<p class='empty-meta'>Trading easily your favorite movies!</p>
-		</div>
-		<div class="container text-center">
-			<br />
-			<p>You have clicked the button <span id="click-nbr"></span> times.</p>
-			<br />
-			<div class="btn-container">
-				<button type="submit" class="btn btn-add">CLICK ME!</button>
-				<button class="btn btn-delete">RESET</button>
-			</div>
-		</div>
+	<body ng-controller="mainController">
+		<div ng-view></div>
 		<script type="text/javascript" src="controllers/clickController.client.js"></script>
 		<script type="text/javascript" src="controllers/userController.client.js"></script>
 	</body>
