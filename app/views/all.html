@@ -1,0 +1,12 @@
+<div class="container">
+    <div class="columns multiline">
+      <div ng-repeat='image in images' class="column col-2">
+          <section class="empty">
+            <p class="empty-title">Title</p>
+            <p class="empty-meta">Year</p>
+            <img class="img-responsive" ng-src='http://placehold.it/150x200&text={{image}}'>
+            <button class="btn btn-primary"><i class="fa fa-refresh"></i> I trade it</button>
+          </section>
+      </div>
+    </div>
+</div>

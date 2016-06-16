@@ -1,14 +1,14 @@
 <div class="container main">
   <img src="/public/img/logo.png" />
   <h2 class="title">MovieSw<i class="fa fa-refresh"></i>p</h2>
-  <p class='empty-meta'>Trading easily your favorite {{ object }}!</p>
+  <p class='empty-meta'>Trading easily your abandon-movies!</p>
 </div>
 <div class="container text-center">
   <br />
-  <p>You have clicked the button <span id="click-nbr"></span> times.</p>
+  <p>You have clicked the button <span id="click-nbr">{{ times }}</span> times.</p>
   <br />
   <div class="btn-container">
-    <button type="submit" class="btn btn-add">CLICK ME!</button>
-    <button class="btn btn-delete">RESET</button>
+    <button type="submit" class="btn btn-add" ng-click="addClick()">CLICK ME!</button>
+    <button class="btn btn-delete" ng-click="resetClick()">RESET</button>
   </div>
 </div>

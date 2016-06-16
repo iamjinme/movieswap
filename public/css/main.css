@@ -1,22 +1,30 @@
 .navbar {
   background: #34495e;
 }
+
 .navbar span {
   color: #fff;
   margin-right: 10px;
 }
+
 .main {
   background: #2B9684;
   text-align: center;
   padding: 10px 0 10px 0;
 }
+
 .title {
   color: #fff;
 }
+
 .navbar .btn-link:hover, .navbar-brand:hover {
   color: #fff;
 }
 
 .btn-link:hover {
   color: #fff;
+}
+
+.columns.multiline {
+  flex-wrap: wrap;
 }

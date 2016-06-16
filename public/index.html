@@ -11,21 +11,19 @@
 		<link href="/public/css/main.css" rel="stylesheet" type="text/css">
 		<link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css" rel="stylesheet"/><!-- font awesome -->
 	</head>
-	<header class="navbar">
-		<section class="navbar-section">
-			<a href="#/" class="btn btn-link btn-lg"><i class="fa fa-video-camera"></i></a>
-			<a href="#/" class="navbar-brand hide-sm">MovieSwap</a>
-		</section>
-		<section class="navbar-section">
-			<a class="btn btn-link">All Movies</a>
-			<span class="hide-sm">Welcome, Do I know you?</span>
-			<a href="/signup" class="btn btn-primary"></i>Sign Up</a>
-			<a href="/login" class="btn btn-link"><i class="fa fa-user"></i> Login</a>
-		</section>
-	</header>
 	<body ng-controller="mainController">
+		<header class="navbar">
+			<section class="navbar-section">
+				<a href="#/" class="btn btn-link btn-lg"><i class="fa fa-video-camera"></i></a>
+				<a href="#/" class="navbar-brand hide-sm">MovieSwap</a>
+			</section>
+			<section class="navbar-section">
+				<a href="#/all" class="btn btn-link">All Movies</a>
+				<span class="hide-sm">Welcome, Do I know you?</span>
+				<a href="/signup" class="btn btn-primary"></i>Sign Up</a>
+				<a href="/login" class="btn btn-link"><i class="fa fa-user"></i> Login</a>
+			</section>
+		</header>
 		<div ng-view></div>
-		<script type="text/javascript" src="controllers/clickController.client.js"></script>
-		<script type="text/javascript" src="controllers/userController.client.js"></script>
 	</body>
 </html>
