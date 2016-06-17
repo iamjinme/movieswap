@@ -1,6 +1,8 @@
 'use strict';
 
+var path = process.cwd();
 var User = require('../models/users.js');
+var sess;
 
 function MovieSwap () {
 
@@ -10,6 +12,7 @@ function MovieSwap () {
 	}
 
 	this.signUp = function(req, res) {
+		sess = req.session;
 		if (!req.body.name) {
 			res.json({error: true, message: 'What is your name?'});
 		} else if (!req.body.email) {
@@ -41,6 +44,51 @@ function MovieSwap () {
 			});
 		};
   };
+
+	this.logIn = function(req, res) {
+		sess = req.session;
+		console.log(sess);
+		if (!req.body.email) {
+			res.json({error: true, message: 'What is your email?'});
+		} else if (!validateEmail(req.body.email)) {
+			res.json({error: true, message: 'Email format is incorrect'});
+		} else if (!req.body.password) {
+			res.json({error: true, message: 'Password its empty, fill this'});
+		} else {
+			User.findOne({ 'email': req.body.email, 'password': req.body.password }, function(err, doc) {
+				if (err) throw err;
+				if (doc) {
+					sess.user = doc;
+					res.json(doc);
+				} else {
+					res.json({error: true, message: 'Email/Password incorrect, try again!'});
+				}
+			});
+		};
+	};
+
+	this.checkLogin = function(req, res) {
+		sess = req.session;
+		if (sess.user) {
+			res.json(sess.user);
+		} else {
+			res.json({error: true, message: 'User not logged'});
+		}
+	}
+
+	this.logOut = function(req, res) {
+		sess = req.session;
+		console.log(sess);
+		delete sess.user;
+		res.json({logout: true});
+	}
+
+	this.initApp = function(req, res) {
+		sess = req.session;
+		sess.count = (sess.count || 0) + 1;
+		console.log(req.session);
+		res.sendFile(path + '/public/index.html');
+	}
 
 	this.getClicks = function (req, res) {
 		Users

@@ -19,9 +19,11 @@
 			</section>
 			<section class="navbar-section">
 				<a href="#/all" class="btn btn-link">All Movies</a>
-				<span class="hide-sm">Welcome, Do I know you?</span>
+				<span ng-hide="login.in" class="hide-sm">Welcome, Do I know you?</span>
+				<span ng-hide="!login.in" class="hide-sm">Welcome, {{ user.name }} !</span>
 				<a ng-hide="login.in" id="btn_signup" class="btn btn-primary"></i>Sign Up</a>
 				<a ng-hide="login.in" id="btn_login" class="btn btn-link"><i class="fa fa-user"></i> Login</a>
+				<a ng-show="login.in" id="btn_logout" class="btn btn-primary"></i>Logout</a>
 			</section>
 		</header>
 		<div ng-view></div>

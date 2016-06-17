@@ -17,6 +17,7 @@ movieswApp.config(['$locationProvider' ,'$routeProvider',
 // Define the main controller on the app module
 movieswApp.controller('mainController', function mainController($scope, $http) {
   $scope.times = 0;
+  $scope.user = {};
   $scope.login = {
     in: false,
     is_login: true,
@@ -59,7 +60,7 @@ movieswApp.controller('mainController', function mainController($scope, $http) {
     $('.modal').addClass('active');
     $scope.$apply();
   });
-  // Sign Up Form submit
+  // SignUp/Login Form submit
   $('#btn_submit')
   .click(function() {
     console.log('submit');
@@ -81,8 +82,22 @@ movieswApp.controller('mainController', function mainController($scope, $http) {
         $scope.$apply();
       } else {
         $scope.login.in = true;
+        $scope.user = json;
         $('.modal').removeClass('active');
         $scope.$apply();
+      }
+    });
+  });
+  // Logout
+  $('#btn_logout').click(function() {
+    $.ajax({
+      url: '/api/logout',
+      type: 'GET'
+    }).done(function(json){
+      if (json.logout) {
+        $scope.login.in = false;
+        $scope.user = {};
+        window.location.href = '/';
       }
     });
   });
@@ -92,4 +107,12 @@ movieswApp.controller('mainController', function mainController($scope, $http) {
   $scope.resetClick = function() {
     $scope.times = 0;
   }
+  // User have session?
+  $http.get('/api/login')
+    .success(function(data) {
+      if (!data.error) {
+        $scope.user = data;
+        $scope.login.in = true;
+      }
+    });
 });

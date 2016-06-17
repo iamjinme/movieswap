@@ -8,16 +8,13 @@ module.exports = function (app) {
 
 	var movieSwap = new MovieSwap();
 
-	app.route('/')
-		.get(function (req, res) {
-			sess = req.session;
-			sess.count = (sess.count || 0) + 1;
-			console.log(req.session);
-			res.sendFile(path + '/public/index.html');
-		});
+	app.get('/', movieSwap.initApp);
 
 	app.post('/api/signup', movieSwap.signUp);
 
-	//app.post('/api/login', movieSwap.logIn);
+	app.post('/api/login', movieSwap.logIn);
+	app.get('/api/login', movieSwap.checkLogin);
+
+	app.get('/api/logout', movieSwap.logOut);
 
 };
