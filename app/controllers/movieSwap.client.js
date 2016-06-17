@@ -37,10 +37,12 @@ movieswApp.controller('mainController', function mainController($scope, $http) {
   });
   // Close button modal
   $('#modal_close').click(function() {
-    $('#login').removeClass('active');
+    $('#login_modal').removeClass('active');
   });
   // Login button (navbar)
   $('#btn_login').click(function() {
+    $scope.login.message = '';
+    $scope.login.error = false;
     $scope.login.is_login = true;
     $scope.login.title = 'Login';
     $scope.login.subtitle = 'Sign Up';
@@ -49,11 +51,40 @@ movieswApp.controller('mainController', function mainController($scope, $http) {
   });
   // Sign Up button (navbar)
   $('#btn_signup').click(function() {
+    $scope.login.message = '';
+    $scope.login.error = false;
     $scope.login.is_login = false;
     $scope.login.title = 'Sign Up';
     $scope.login.subtitle = 'Login';
     $('.modal').addClass('active');
     $scope.$apply();
+  });
+  // Sign Up Form submit
+  $('#btn_submit')
+  .click(function() {
+    console.log('submit');
+    if ($scope.login.is_login) {
+      var url = '/api/login';
+    } else {
+      var url = '/api/signup';
+    }
+    var data = $('#login_form').serialize();
+    $.ajax({
+      url: url,
+      type: 'POST',
+      data: data
+    }).done(function(json){
+      if (json.error) {
+        $scope.login.error = true;
+        $scope.login.message = json.message;
+        $('#login_message').removeClass('hide');
+        $scope.$apply();
+      } else {
+        $scope.login.in = true;
+        $('.modal').removeClass('active');
+        $scope.$apply();
+      }
+    });
   });
   $scope.addClick = function() {
     $scope.times++;

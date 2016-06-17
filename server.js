@@ -21,6 +21,9 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
 
+	app.use(require('cookie-parser')());
+  app.use(require('body-parser').urlencoded({ extended: true }));
+
 	app.use(session({
 		secret: 'movie</swap>',
 		resave: false,

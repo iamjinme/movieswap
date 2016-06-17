@@ -1,12 +1,12 @@
 'use strict';
 
 var path = process.cwd();
-var ClickHandler = require(path + '/app/controllers/clickHandler.server.js');
+var MovieSwap = require(path + '/app/controllers/movieSwap.server.js');
 var sess;
 
 module.exports = function (app) {
 
-	var clickHandler = new ClickHandler();
+	var movieSwap = new MovieSwap();
 
 	app.route('/')
 		.get(function (req, res) {
@@ -15,5 +15,9 @@ module.exports = function (app) {
 			console.log(req.session);
 			res.sendFile(path + '/public/index.html');
 		});
+
+	app.post('/api/signup', movieSwap.signUp);
+
+	//app.post('/api/login', movieSwap.logIn);
 
 };
