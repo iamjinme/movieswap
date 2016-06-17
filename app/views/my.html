@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="columns">
+    <div class="column col-md-4">
+      <br />
+      <div class="btn-group btn-group-block">
+        <button class="btn">Your trade request</button>
+        <button class="btn btn-primary">Trade request for you</button>
+      </div>
+      <h3 class="empty-title"><i class="fa fa-search"></i> Search movies</h3>
+      <div class="empty-action input-group">
+        <input type="text" class="form-input" placeholder="Civil War, Batman Begins, The Avengers..." />
+        <button class="btn btn-primary input-group-btn">Go!</button>
+      </div>
+      <br />
+      <h3 class="empty-title"><i class="fa fa-video-camera"></i> My movies</h3>
+    </div>
+    <div ng-repeat='movie in results' class="column col-md-2">
+      <section class="empty">
+        <img class="img-responsive centered" ng-src='http://placehold.it/150x200&text={{movie}}'>
+      </section>
+    </div>
+  </div>
+  <div class="columns multiline">
+    <div ng-repeat='image in images' class="column col-2">
+      <section class="empty">
+        <p class="empty-title">Title</p>
+        <p class="empty-meta">Year</p>
+        <img class="img-responsive centered" ng-src='http://placehold.it/150x200&text={{image}}'>
+        <button ng-hide="!login.in" class="btn"><i class="fa fa-close"></i> Delete</button>
+      </section>
+    </div>
+  </div>
+</div>

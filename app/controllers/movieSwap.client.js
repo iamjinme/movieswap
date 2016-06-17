@@ -11,6 +11,9 @@ movieswApp.config(['$locationProvider' ,'$routeProvider',
       when('/all', {
         templateUrl: '/views/all.html'
       }).
+      when('/my', {
+        templateUrl: '/views/my.html'
+      }).
       otherwise('/');
   }
 ]);
@@ -27,6 +30,7 @@ movieswApp.controller('mainController', function mainController($scope, $http) {
     error: false
   };
   $scope.images = [1, 2, 3, 4, 5, 6, 7, 8];
+  $scope.results = [1, 2, 3, 4];
   // Clear buttons
   $('.btn-clear').click(function() {
     var modal = $(this).data('modal');
