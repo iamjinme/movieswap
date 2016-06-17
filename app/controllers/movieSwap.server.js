@@ -1,5 +1,7 @@
 'use strict';
 
+var request = require('request');
+
 var path = process.cwd();
 var User = require('../models/users.js');
 var sess;
@@ -88,6 +90,20 @@ function MovieSwap () {
 		sess.count = (sess.count || 0) + 1;
 		console.log(req.session);
 		res.sendFile(path + '/public/index.html');
+	}
+
+	this.getSearch = function(req, res) {
+		var movie = req.params.movie;
+		var api_url = "http://www.omdbapi.com/?s=" + movie;
+		request(api_url, function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        var data = JSON.parse(body).Search;
+				data = data.filter(function(value, index) {
+          return (index < 4);
+        });
+				res.json(data);
+			}
+		});
 	}
 
 	this.getClicks = function (req, res) {
