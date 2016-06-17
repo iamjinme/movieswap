@@ -17,11 +17,50 @@ movieswApp.config(['$locationProvider' ,'$routeProvider',
 // Define the main controller on the app module
 movieswApp.controller('mainController', function mainController($scope, $http) {
   $scope.times = 0;
+  $scope.login = {
+    in: false,
+    is_login: true,
+    title: '',
+    subtitle: '',
+    message: '',
+    error: false
+  };
   $scope.images = [1, 2, 3, 4, 5, 6, 7, 8];
+  // Clear buttons
+  $('.btn-clear').click(function() {
+    var modal = $(this).data('modal');
+    if (modal) {
+      $(modal).removeClass('active');
+    } else {
+      $(this).parent().addClass('hide');
+    }
+  });
+  // Close button modal
+  $('#modal_close').click(function() {
+    $('#login').removeClass('active');
+  });
+  // Login button (navbar)
+  $('#btn_login').click(function() {
+    $scope.login.is_login = true;
+    $scope.login.title = 'Login';
+    $scope.login.subtitle = 'Sign Up';
+    $('.modal').addClass('active');
+    console.log($scope.login.is_login);
+    $scope.$apply();
+  });
+  // Sign Up button (navbar)
+  $('#btn_signup').click(function() {
+    $scope.login.is_login = false;
+    $scope.login.title = 'Sign Up';
+    $scope.login.subtitle = 'Login';
+    $('.modal').addClass('active');
+    console.log($scope.login.is_login);
+    $scope.$apply();
+  });
   $scope.addClick = function() {
-    this.times++;
+    $scope.times++;
   }
   $scope.resetClick = function() {
-    this.times = 0;
+    $scope.times = 0;
   }
 });

@@ -9,11 +9,12 @@ var Movie = new Schema({
   date: Date,
   owner_id: Number,
   requested: {
-    status: Boolean,
+    accepted: Boolean,
     user_id: Number,
     date: Date
   }
-  likes: Number
+  likes: Array,
+  format: Number // CD, DVD, Blu-ray
 });
 
 module.exports = mongoose.model('Movie', Movie);

@@ -28,3 +28,22 @@
 .columns.multiline {
   flex-wrap: wrap;
 }
+
+.modal-header {
+  background: #2B9684;
+  color: #fff;
+}
+
+.modal-header .btn {
+  color: #fff;
+}
+
+.toast-message {
+  background: #E85600;
+  padding: 10px 15px 10px 15px;
+  color: #fff;
+}
+
+.toast-message .btn {
+  color: #fff;
+}
