@@ -45,7 +45,6 @@ movieswApp.controller('mainController', function mainController($scope, $http) {
     $scope.login.title = 'Login';
     $scope.login.subtitle = 'Sign Up';
     $('.modal').addClass('active');
-    console.log($scope.login.is_login);
     $scope.$apply();
   });
   // Sign Up button (navbar)
@@ -54,7 +53,6 @@ movieswApp.controller('mainController', function mainController($scope, $http) {
     $scope.login.title = 'Sign Up';
     $scope.login.subtitle = 'Login';
     $('.modal').addClass('active');
-    console.log($scope.login.is_login);
     $scope.$apply();
   });
   $scope.addClick = function() {

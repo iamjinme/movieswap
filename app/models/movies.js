@@ -5,6 +5,7 @@ var Schema = mongoose.Schema;
 
 var Movie = new Schema({
   title: String,
+  imdb_id: String,
   year: Number,
   date: Date,
   owner_id: Number,
