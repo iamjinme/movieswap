@@ -17,7 +17,7 @@
     </div>
     <div ng-repeat='movie in results' class="column col-md-2">
       <section class="empty">
-        <button type="button" class="btn btn-add float-right tooltip" data-tooltip="{{ movie.Title }}" aria-label="Add"><i class="fa fa-plus-circle"></i></button>
+        <button type="button" ng-click="addMovie(movie)" class="btn btn-add float-right tooltip" data-tooltip="{{ movie.Title }}" aria-label="Add"><i class="fa fa-plus-circle"></i></button>
         <p class="empty-title text-ellipsis">{{ movie.Title }}</p>
         <p class="empty-meta">{{ movie.Year }}</p>
         <img class="img-responsive centered" ng-src="{{ movie.Poster }}">

@@ -111,6 +111,11 @@ function MovieSwap () {
 		});
 	}
 
+	this.addMovie = function(req, res) {
+		sess = req.session;
+		res.json(req.body);
+	}
+
 	this.getClicks = function (req, res) {
 		Users
 			.findOne({ 'github.id': req.user.github.id }, { '_id': false })

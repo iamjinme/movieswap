@@ -67,7 +67,6 @@ movieswApp.controller('mainController', function mainController($scope, $http) {
   // SignUp/Login Form submit
   $('#btn_submit')
   .click(function() {
-    console.log('submit');
     if ($scope.login.is_login) {
       var url = '/api/login';
     } else {
@@ -118,11 +117,25 @@ movieswApp.controller('mainController', function mainController($scope, $http) {
         .success(function(data) {
           if (data.length) {
             $scope.results = data;
-            console.log(data);
           }
           $('#btn_search').removeClass('loading');
         });
     }
+  }
+  // Add movie
+  $scope.addMovie = function(movie) {
+    $.ajax({
+      url: '/api/movies',
+      type: 'POST',
+      data: movie,
+      dataType: 'json'
+    }).done(function(json){
+      if (json.error) {
+        console.log('error');
+      } else {
+        console.log('added');
+      }
+    });
   }
   $scope.addClick = function() {
     $scope.times++;
