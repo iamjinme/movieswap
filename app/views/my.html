@@ -17,11 +17,10 @@
     </div>
     <div ng-repeat='movie in results' class="column col-md-2">
       <section class="empty">
-        <button type="button" class="btn btn-add float-right" aria-label="Add"><i class="fa fa-plus-circle"></i></button>
-        <p class="empty-title">{{ movie.Title }}</p>
+        <button type="button" class="btn btn-add float-right tooltip" data-tooltip="{{ movie.Title }}" aria-label="Add"><i class="fa fa-plus-circle"></i></button>
+        <p class="empty-title text-ellipsis">{{ movie.Title }}</p>
         <p class="empty-meta">{{ movie.Year }}</p>
-        <img ng-if="movie.Poster !== 'N/A'" class="img-responsive centered" ng-src="{{ movie.Poster }}">
-        <img ng-if="movie.Poster === 'N/A'" class="img-responsive centered" ng-src="{{ 'http://placehold.it/150x200&text=N/A' }}">
+        <img class="img-responsive centered" ng-src="{{ movie.Poster }}">
       </section>
     </div>
   </div>

@@ -94,13 +94,18 @@ function MovieSwap () {
 
 	this.getSearch = function(req, res) {
 		var movie = req.params.movie;
-		var api_url = "http://www.omdbapi.com/?s=" + movie;
+		var api_url = "http://www.omdbapi.com/?type=movie&s=" + movie;
 		request(api_url, function (error, response, body) {
       if (!error && response.statusCode == 200) {
         var data = JSON.parse(body).Search;
+				// Filter without posters
 				data = data.filter(function(value, index) {
-          return (index < 4);
+          return (value.Poster !== 'N/A');
         });
+				// Only four results
+				data = data.filter(function(value, index) {
+					return (index < 4);
+				});
 				res.json(data);
 			}
 		});
