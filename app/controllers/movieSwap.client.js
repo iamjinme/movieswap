@@ -30,7 +30,7 @@ movieswApp.controller('mainController', function mainController($scope, $http) {
     error: false
   };
   $scope.images = [1, 2, 3, 4, 5, 6, 7, 8];
-  $scope.results = [1, 2, 3, 4];
+  $scope.results = [];
   // Clear buttons
   $('.btn-clear').click(function() {
     var modal = $(this).data('modal');
@@ -105,6 +105,20 @@ movieswApp.controller('mainController', function mainController($scope, $http) {
       }
     });
   });
+  // Search movies
+  $scope.getSearch = function() {
+    $('#btn_search').addClass('loading');
+    if (this.search) {
+      $http.get('/api/search/' + this.search)
+        .success(function(data) {
+          if (data.length) {
+            $scope.results = data;
+            console.log(data);
+          }
+          $('#btn_search').removeClass('loading');
+        });
+    }
+  }
   $scope.addClick = function() {
     $scope.times++;
   }

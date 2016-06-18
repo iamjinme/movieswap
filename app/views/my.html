@@ -7,26 +7,32 @@
         <button class="btn btn-primary">Trade request for you</button>
       </div>
       <h3 class="empty-title"><i class="fa fa-search"></i> Search movies</h3>
-      <div class="empty-action input-group">
-        <input type="text" class="form-input" placeholder="Civil War, Batman Begins, The Avengers..." />
-        <button class="btn btn-primary input-group-btn">Go!</button>
-      </div>
+      <form>
+        <div class="empty-action input-group">
+          <input type="text" class="form-input" ng-model="search" placeholder="Civil War, Batman Begins, The Avengers..." />
+          <button id="btn_search" class="btn btn-primary input-group-btn" ng-click="getSearch()">Go!</button>
+        </div>
+      </form>
       <br />
-      <h3 class="empty-title"><i class="fa fa-video-camera"></i> My movies</h3>
     </div>
     <div ng-repeat='movie in results' class="column col-md-2">
       <section class="empty">
-        <img class="img-responsive centered" ng-src='http://placehold.it/150x200&text={{movie}}'>
+        <button type="button" class="btn btn-add float-right" aria-label="Add"><i class="fa fa-plus-circle"></i></button>
+        <p class="empty-title">{{ movie.Title }}</p>
+        <p class="empty-meta">{{ movie.Year }}</p>
+        <img ng-if="movie.Poster !== 'N/A'" class="img-responsive centered" ng-src="{{ movie.Poster }}">
+        <img ng-if="movie.Poster === 'N/A'" class="img-responsive centered" ng-src="{{ 'http://placehold.it/150x200&text=N/A' }}">
       </section>
     </div>
   </div>
+  <h3><i class="fa fa-video-camera"></i> My movies</h3>
   <div class="columns multiline">
     <div ng-repeat='image in images' class="column col-2">
       <section class="empty">
+        <button type="button" class="btn btn-delete float-right" aria-label="Delete"><i class="fa fa-trash"></i></button>
         <p class="empty-title">Title</p>
         <p class="empty-meta">Year</p>
         <img class="img-responsive centered" ng-src='http://placehold.it/150x200&text={{image}}'>
-        <button ng-hide="!login.in" class="btn"><i class="fa fa-close"></i> Delete</button>
       </section>
     </div>
   </div>

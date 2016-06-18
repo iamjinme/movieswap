@@ -47,3 +47,43 @@
 .toast-message .btn {
   color: #fff;
 }
+
+.btn-delete {
+  background: transparent;
+  border: 0;
+  color: #666;
+  height: 2rem;
+  margin-left: .3rem;
+  opacity: .45;
+  padding: 0;
+}
+
+.btn-delete:hover {
+  background: transparent;
+  color: #666;
+  opacity: .85;
+}
+
+.btn-delete:before {
+  font-size: 2rem;
+}
+
+.btn-add {
+  background: transparent;
+  border: 0;
+  color: #007D71;
+  height: 2rem;
+  margin-left: .3rem;
+  opacity: .45;
+  padding: 0;
+}
+
+.btn-add:hover {
+  background: transparent;
+  color: #007D71;
+  opacity: .85;
+}
+
+.btn-add:before {
+  font-size: 2rem;
+}
