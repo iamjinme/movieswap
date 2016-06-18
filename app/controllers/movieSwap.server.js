@@ -134,6 +134,20 @@ function MovieSwap () {
 		}
 	}
 
+	this.getMoviesUser = function(req, res) {
+		sess = req.session;
+		if (sess.user) {
+			Movie
+	      .find({'owner_id': sess.user._id}, { __v: false })
+	      .sort({'date': -1})
+	      .exec(function(err, movies) {
+	        res.json(movies);
+	      });
+		} else {
+			res.json({ error: true, message: 'Unauthorized'});
+		}
+  };
+
 	this.getClicks = function (req, res) {
 		Users
 			.findOne({ 'github.id': req.user.github.id }, { '_id': false })
