@@ -8,12 +8,13 @@ var Movie = new Schema({
   imdb_id: String,
   year: Number,
   date: Date,
-  owner_id: Number,
+  img: String,
+  owner_id: String,
   requested: {
     accepted: Boolean,
-    user_id: Number,
+    user_id: String,
     date: Date
-  }
+  },
   likes: Array,
   format: Number // CD, DVD, Blu-ray
 });

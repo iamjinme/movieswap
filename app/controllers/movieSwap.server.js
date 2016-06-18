@@ -4,6 +4,7 @@ var request = require('request');
 
 var path = process.cwd();
 var User = require('../models/users.js');
+var Movie = require('../models/movies.js');
 var sess;
 
 function MovieSwap () {
@@ -113,7 +114,24 @@ function MovieSwap () {
 
 	this.addMovie = function(req, res) {
 		sess = req.session;
-		res.json(req.body);
+		if (sess.user) {
+			var movie = {
+				'title': req.body.Title,
+				'imdb_id': req.body.imdbID,
+				'year': req.body.Year,
+				'date': new Date(),
+				'img': req.body.Poster,
+				'owner_id': sess.user._id,
+				'format': 0
+			};
+	    var options = { upsert: true, new: true, setDefaultsOnInsert: true };
+			Movie.findOneAndUpdate({ 'imdb_id': movie.imdb_id,  'owner_id': movie.owner_id }, movie, options, function(err, result) {
+				if (err) { throw err; }
+				res.json(result);
+	    });
+		} else {
+			res.json({ error: true, message: 'Unauthorized'});
+		}
 	}
 
 	this.getClicks = function (req, res) {
