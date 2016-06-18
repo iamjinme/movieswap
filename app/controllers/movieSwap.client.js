@@ -73,11 +73,16 @@ movieswApp.controller('mainController', function mainController($scope, $http) {
     } else {
       var url = '/api/signup';
     }
-    var data = $('#login_form').serialize();
+    var data = {
+      'name': $('input[name=name]').val(),
+      'email': $('input[name=email]').val(),
+      'password': $('input[name=password]').val().hashCode()
+    }
     $.ajax({
       url: url,
       type: 'POST',
-      data: data
+      data: data,
+      dataType: 'json'
     }).done(function(json){
       if (json.error) {
         $scope.login.error = true;
