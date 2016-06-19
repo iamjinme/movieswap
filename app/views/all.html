@@ -2,11 +2,11 @@
     <div class="columns multiline">
       <div ng-repeat='movie in collection' class="column col-2">
           <section class="empty">
-            <p class="empty-title">{{ movie.title }}</p>
+            <p class="empty-title text-ellipsis">{{ movie.title }}</p>
             <p class="empty-meta">{{ movie.year }}</p>
             <img class="img-responsive centered" ng-src="{{ movie.img }}">
-            <button ng-hide="logged === true" class="btn"><i class="fa fa-heart"></i> I like it</button>
-            <div ng-show="logged === true" class="btn-group btn-group-block">
+            <button ng-hide="logged && (user_id !== movie.owner_id)" class="btn"><i class="fa fa-heart"></i> I like it</button>
+            <div ng-show="logged && (user_id !== movie.owner_id)" class="btn-group btn-group-block">
               <button class="btn btn-primary"><i class="fa fa-refresh"></i> I trade it</button>
               <button class="btn"><i class="fa fa-heart"></i></button>
             </div>
