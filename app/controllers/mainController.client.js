@@ -10,7 +10,8 @@ movieswApp.config(['$locationProvider' ,'$routeProvider',
         controller : 'mainController'
       }).
       when('/all', {
-        templateUrl: '/views/all.html'
+        templateUrl: '/views/all.html',
+        controller : 'allController'
       }).
       when('/my', {
         templateUrl: '/views/my.html',
