@@ -9,6 +9,8 @@ var sess;
 
 function MovieSwap () {
 
+	var max_results = 4;
+
 	function validateEmail(email) {
 	    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	    return re.test(email);
@@ -100,14 +102,12 @@ function MovieSwap () {
       if (!error && response.statusCode == 200) {
         var data = JSON.parse(body).Search;
 				// Filter without posters
-				data = data.filter(function(value, index) {
-          return (value.Poster !== 'N/A');
-        });
-				// Only four results
-				data = data.filter(function(value, index) {
-					return (index < 4);
-				});
-				res.json(data);
+				if (data.lenght) {
+					data = data.filter(function(value, index) {
+	          return (value.Poster !== 'N/A');
+	        });
+				}
+				res.json(data.slice(0,max_results));
 			}
 		});
 	}

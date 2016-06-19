@@ -83,7 +83,11 @@ movieswApp.controller('loginController', function loginController($scope, $http,
   // User have session?
   $http.get('/api/login')
     .success(function(data) {
-      if (!data.error) {
+      if (data.error) {
+        session.set('user', {});
+        $scope.user = session.user;
+        $scope.login.in = false;
+      } else {
         session.set('user', data);
         $scope.user = session.user;
         $scope.login.in = true;
