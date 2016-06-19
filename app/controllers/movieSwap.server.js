@@ -165,6 +165,17 @@ function MovieSwap () {
 		}
 	}
 
+	this.getMoviesAll = function(req, res) {
+		sess = req.session;
+		Movie
+	  	.find({}, { __v: false })
+	    .sort({'date': -1})
+			.limit(18)
+	    .exec(function(err, movies) {
+	    	res.json(movies);
+	   	});
+  };
+
 	this.getClicks = function (req, res) {
 		Users
 			.findOne({ 'github.id': req.user.github.id }, { '_id': false })
