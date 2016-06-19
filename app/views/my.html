@@ -26,12 +26,12 @@
   </div>
   <h3><i class="fa fa-video-camera"></i> My movies</h3>
   <div class="columns multiline">
-    <div ng-repeat='image in images' class="column col-2">
+    <div ng-repeat='movie in collection' class="column col-2">
       <section class="empty">
-        <button type="button" class="btn btn-delete float-right" aria-label="Delete"><i class="fa fa-trash"></i></button>
-        <p class="empty-title">Title</p>
-        <p class="empty-meta">Year</p>
-        <img class="img-responsive centered" ng-src='http://placehold.it/150x200&text={{image}}'>
+        <button type="button" ng-click="removeMovie(movie)" class="btn btn-delete float-right tooltip" data-tooltip="{{ movie.title }}" aria-label="Delete"><i class="fa fa-trash"></i></button>
+        <p class="empty-title text-ellipsis">{{ movie.title }}</p>
+        <p class="empty-meta">{{ movie.year }}</p>
+        <img class="img-responsive centered" ng-src="{{ movie.img }}">
       </section>
     </div>
   </div>

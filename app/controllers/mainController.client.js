@@ -13,7 +13,8 @@ movieswApp.config(['$locationProvider' ,'$routeProvider',
         templateUrl: '/views/all.html'
       }).
       when('/my', {
-        templateUrl: '/views/my.html'
+        templateUrl: '/views/my.html',
+        controller : 'myController'
       }).
       otherwise('/');
   }
@@ -21,8 +22,6 @@ movieswApp.config(['$locationProvider' ,'$routeProvider',
 // Define the main controller on the app module
 movieswApp.controller('mainController', function mainController($scope, $http, session) {
   $scope.times = 0;
-  $scope.images = [1, 2, 3, 4, 5, 6, 7, 8];
-  $scope.results = [];
   // Clear buttons
   $('.btn-clear').click(function() {
     var modal = $(this).data('modal');
@@ -32,34 +31,6 @@ movieswApp.controller('mainController', function mainController($scope, $http, s
       $(this).parent().addClass('hide');
     }
   });
-  // Search movies
-  $scope.getSearch = function() {
-    $('#btn_search').addClass('loading');
-    if (this.search) {
-      $http.get('/api/search/' + this.search)
-        .success(function(data) {
-          if (data.length) {
-            $scope.results = data;
-          }
-          $('#btn_search').removeClass('loading');
-        });
-    }
-  }
-  // Add movie
-  $scope.addMovie = function(movie) {
-    $.ajax({
-      url: '/api/movies',
-      type: 'POST',
-      data: movie,
-      dataType: 'json'
-    }).done(function(json){
-      if (json.error) {
-        console.log('error');
-      } else {
-        console.log('added');
-      }
-    });
-  }
   $scope.addClick = function() {
     $scope.times++;
   }
