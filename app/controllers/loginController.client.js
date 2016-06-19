@@ -1,25 +1,5 @@
-// Define the app module
-var movieswApp = angular.module('movieswApp', ['ngRoute']);
-// Define the configuration of app
-movieswApp.config(['$locationProvider' ,'$routeProvider',
-  function config($locationProvider, $routeProvider) {
-    // Define routes
-    $routeProvider.
-      when('/', {
-        templateUrl: '/views/main.html'
-      }).
-      when('/all', {
-        templateUrl: '/views/all.html'
-      }).
-      when('/my', {
-        templateUrl: '/views/my.html'
-      }).
-      otherwise('/');
-  }
-]);
-// Define the main controller on the app module
-movieswApp.controller('mainController', function mainController($scope, $http) {
-  $scope.times = 0;
+// Login Controller
+movieswApp.controller('loginController', function loginController($scope, $http, session) {
   $scope.user = {};
   $scope.login = {
     in: false,
@@ -29,21 +9,6 @@ movieswApp.controller('mainController', function mainController($scope, $http) {
     message: '',
     error: false
   };
-  $scope.images = [1, 2, 3, 4, 5, 6, 7, 8];
-  $scope.results = [];
-  // Clear buttons
-  $('.btn-clear').click(function() {
-    var modal = $(this).data('modal');
-    if (modal) {
-      $(modal).removeClass('active');
-    } else {
-      $(this).parent().addClass('hide');
-    }
-  });
-  // Close button modal
-  $('#modal_close').click(function() {
-    $('#login_modal').removeClass('active');
-  });
   // Login button (navbar)
   $('#btn_login').click(function() {
     $scope.login.message = '';
@@ -63,6 +28,10 @@ movieswApp.controller('mainController', function mainController($scope, $http) {
     $scope.login.subtitle = 'Login';
     $('.modal').addClass('active');
     $scope.$apply();
+  });
+  // Close button modal
+  $('#modal_close').click(function() {
+    $('#login_modal').removeClass('active');
   });
   // SignUp/Login Form submit
   $('#btn_submit')
@@ -90,7 +59,8 @@ movieswApp.controller('mainController', function mainController($scope, $http) {
         $scope.$apply();
       } else {
         $scope.login.in = true;
-        $scope.user = json;
+        session.set('user', json);
+        $scope.user = session.user;
         $('.modal').removeClass('active');
         $scope.$apply();
       }
@@ -104,50 +74,18 @@ movieswApp.controller('mainController', function mainController($scope, $http) {
     }).done(function(json){
       if (json.logout) {
         $scope.login.in = false;
-        $scope.user = {};
+        session.remove();
+        $scope.user = session.user;
         window.location.href = '/';
       }
     });
   });
-  // Search movies
-  $scope.getSearch = function() {
-    $('#btn_search').addClass('loading');
-    if (this.search) {
-      $http.get('/api/search/' + this.search)
-        .success(function(data) {
-          if (data.length) {
-            $scope.results = data;
-          }
-          $('#btn_search').removeClass('loading');
-        });
-    }
-  }
-  // Add movie
-  $scope.addMovie = function(movie) {
-    $.ajax({
-      url: '/api/movies',
-      type: 'POST',
-      data: movie,
-      dataType: 'json'
-    }).done(function(json){
-      if (json.error) {
-        console.log('error');
-      } else {
-        console.log('added');
-      }
-    });
-  }
-  $scope.addClick = function() {
-    $scope.times++;
-  }
-  $scope.resetClick = function() {
-    $scope.times = 0;
-  }
   // User have session?
   $http.get('/api/login')
     .success(function(data) {
       if (!data.error) {
-        $scope.user = data;
+        session.set('user', data);
+        $scope.user = session.user;
         $scope.login.in = true;
       }
     });

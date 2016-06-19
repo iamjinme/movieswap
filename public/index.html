@@ -11,25 +11,25 @@
 		<script src="/public/js/angular.min.js"></script><!-- load angular -->
 		<script src="/public/js/angular-route.min.js"></script><!-- load ng-route -->
 	</head>
-	<body ng-controller="mainController">
-		<header class="navbar">
-			<section class="navbar-section">
-				<a href="#/" class="btn btn-link btn-lg"><i class="fa fa-video-camera"></i></a>
-				<a href="#/" class="navbar-brand hide-sm">MovieSwap</a>
-			</section>
-			<section class="navbar-section">
-				<a href="#/all" class="btn btn-link">All Movies</a>
-				<a ng-hide="!login.in" href="#/my" class="btn btn-link">My Movies</a>
-				<span ng-hide="login.in" class="hide-sm">Welcome, Do I know you?</span>
-				<span ng-hide="!login.in" class="hide-sm">Welcome, {{ user.name }}!</span>
-				<a ng-hide="login.in" id="btn_signup" class="btn btn-primary"></i>Sign Up</a>
-				<a ng-hide="login.in" id="btn_login" class="btn btn-link"><i class="fa fa-user"></i> Login</a>
-				<a ng-show="login.in" id="btn_logout" class="btn btn-primary"></i>Logout</a>
-			</section>
-		</header>
-		<div ng-view></div>
-		<!-- Login -->
-		<div class="column">
+	<body>
+		<div ng-controller="loginController">
+			<!-- Menu -->
+			<header class="navbar">
+				<section class="navbar-section">
+					<a href="#/" class="btn btn-link btn-lg"><i class="fa fa-video-camera"></i></a>
+					<a href="#/" class="navbar-brand hide-sm">MovieSwap</a>
+				</section>
+				<section class="navbar-section">
+					<a href="#/all" class="btn btn-link">All Movies</a>
+					<a ng-hide="!login.in" href="#/my" class="btn btn-link">My Movies</a>
+					<span ng-hide="login.in" class="hide-sm">Welcome, Do I know you?</span>
+					<span ng-hide="!login.in" class="hide-sm">Welcome, {{ user.name }}!</span>
+					<a ng-hide="login.in" id="btn_signup" class="btn btn-primary"></i>Sign Up</a>
+					<a ng-hide="login.in" id="btn_login" class="btn btn-link"><i class="fa fa-user"></i> Login</a>
+					<a ng-show="login.in" id="btn_logout" class="btn btn-primary"></i>Logout</a>
+				</section>
+			</header>
+			<!-- Login modal -->
 			<div id="login_modal" class="modal modal-sm">
 				<div class="modal-overlay"></div>
 				<div class="modal-container" role="document">
@@ -38,8 +38,8 @@
 						<div class="modal-title">{{ login.title }}</div>
 					</div>
 					<div id="login_message" ng-show="login.message" class="toast-message">
-					    <button class="btn btn-clear float-right"></button>
-					    {{ login.message }}
+							<button class="btn btn-clear float-right"></button>
+							{{ login.message }}
 					</div>
 					<div class="modal-body">
 						<div class="content">
@@ -61,7 +61,7 @@
 										<input type="checkbox" />
 										<i class="form-icon"></i> Remember me
 									</label>
-                </div>
+								</div>
 							</form>
 						</div>
 					</div>
@@ -70,14 +70,16 @@
 							<button class="btn">{{ login.subtitle }}</button>
 							<button class="btn" id="modal_close">Close</button>
 							<button class="btn btn-primary" id="btn_submit">{{ login.title }}</button>
-            </div>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		<div>
+		<div ng-view></div>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-		<script src="/controllers/movieSwap.client.js"></script><!-- main controller -->
-		<script src="/controllers/userService.client.js"></script><!-- main controller -->
-		<script src="/common/functions.js"></script><!-- main controller -->
+		<script src="/controllers/mainController.client.js"></script><!-- Main Controller -->
+		<script src="/controllers/sessionService.client.js"></script><!-- Session Service -->
+		<script src="/controllers/loginController.client.js"></script><!-- Login Controller -->
+		<script src="/common/functions.js"></script><!-- Commons Functions -->
 	</body>
 </html>
