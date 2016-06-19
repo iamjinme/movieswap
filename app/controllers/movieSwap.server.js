@@ -148,6 +148,23 @@ function MovieSwap () {
 		}
   };
 
+	this.delMovie = function(req, res) {
+		sess = req.session;
+		if (sess.user) {
+			Movie.findOne({ 'owner_id': sess.user._id, '_id': req.body._id }, function(err, result) {
+	    	if (err) throw err;
+				if (result) {
+					result.remove();
+					res.json(result);
+				} else {
+					res.json({ error: true, message: 'Movie not found'});
+				}
+	    });
+		} else {
+			res.json({ error: true, message: 'Unauthorized'});
+		}
+	}
+
 	this.getClicks = function (req, res) {
 		Users
 			.findOne({ 'github.id': req.user.github.id }, { '_id': false })

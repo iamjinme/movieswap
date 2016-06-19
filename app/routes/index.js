@@ -20,6 +20,7 @@ module.exports = function (app) {
 	app.get('/api/search/:movie', movieSwap.getSearch);
 
 	app.post('/api/movies', movieSwap.addMovie);
+	app.delete('/api/movies', movieSwap.delMovie);
 	app.get('/api/movies/user', movieSwap.getMoviesUser);
 
 };

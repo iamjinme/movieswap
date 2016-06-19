@@ -27,14 +27,18 @@ movieswApp.controller('myController', function myController($scope, $http, sessi
       if (json.error) {
         console.log('error');
       } else {
-        console.log('added');
+        $scope.collection.unshift(json);
+        $scope.$apply();
       }
     });
   }
   // Remove movie
   $scope.removeMovie = function(movie) {
-    console.log('remove');
-    /*
+    // Position movie
+    function thatMovie(element, index) {
+      return element._id === movie._id;
+    }
+    // Call API
     $.ajax({
       url: '/api/movies',
       type: 'DELETE',
@@ -44,10 +48,13 @@ movieswApp.controller('myController', function myController($scope, $http, sessi
       if (json.error) {
         console.log('error');
       } else {
-        console.log('remove');
+        var pos = $scope.collection.findIndex(thatMovie);
+        if (pos) {
+          $scope.collection.splice(pos, 1);
+          $scope.$apply();
+        }
       }
     });
-    */
   }
   // Load collection
   $http.get('/api/movies/user')
