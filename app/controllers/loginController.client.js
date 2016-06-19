@@ -63,6 +63,8 @@ movieswApp.controller('loginController', function loginController($scope, $http,
         $scope.user = session.user;
         $('.modal').removeClass('active');
         $scope.$apply();
+        // Add bradcast for future changes
+        $scope.$broadcast("LOGIN");        
       }
     });
   });
