@@ -176,6 +176,31 @@ function MovieSwap () {
 	   	});
   };
 
+	this.toggleLike = function(req, res) {
+		var ip = (req.headers['x-forwarded-for'] || req.connection.remoteAddress);
+		var id = req.params.id;
+		console.log(ip, id);
+		if (id) {
+			Movie.findOne({ '_id': id  }, function(err, movie) {
+				if (err) throw err;
+				if (movie) {
+					var pos = movie.likes.indexOf(ip);
+					if (pos >= 0) {
+						movie.likes.splice(pos, 1);
+					} else {
+						movie.likes.push(ip);
+					}
+					movie.save();
+					res.json({ id: id, favorites: movie.likes.length });
+				} else {
+					res.json({ error: true, message: 'Movie not found' });
+				}
+			})
+		} else {
+			res.json({ error: true, message: 'Param id required' });
+		}
+	}
+
 	this.getClicks = function (req, res) {
 		Users
 			.findOne({ 'github.id': req.user.github.id }, { '_id': false })

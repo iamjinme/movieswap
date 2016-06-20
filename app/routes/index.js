@@ -24,4 +24,6 @@ module.exports = function (app) {
 	app.delete('/api/movies', movieSwap.delMovie);
 	app.get('/api/movies/user', movieSwap.getMoviesUser);
 
+	app.get('/api/likes/:id', movieSwap.toggleLike);
+
 };
