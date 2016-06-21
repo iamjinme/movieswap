@@ -23,15 +23,6 @@ movieswApp.config(['$locationProvider' ,'$routeProvider',
 // Define the main controller on the app module
 movieswApp.controller('mainController', function mainController($scope, $http, session) {
   $scope.times = 0;
-  // Clear buttons
-  $('.btn-clear').click(function() {
-    var modal = $(this).data('modal');
-    if (modal) {
-      $(modal).removeClass('active');
-    } else {
-      $(this).parent().addClass('hide');
-    }
-  });
   $scope.addClick = function() {
     $scope.times++;
   }

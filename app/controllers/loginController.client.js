@@ -9,6 +9,15 @@ movieswApp.controller('loginController', function loginController($scope, $http,
     message: '',
     error: false
   };
+  // Clear buttons
+  $('.btn-clear').click(function() {
+    var modal = $(this).data('modal');
+    if (modal) {
+      $(modal).removeClass('active');
+    } else {
+      $(this).parent().addClass('hide');
+    }
+  });  
   // Login button (navbar)
   $('#btn_login').click(function() {
     $scope.login.message = '';

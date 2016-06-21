@@ -8,6 +8,7 @@ movieswApp.controller('allController', function allController($scope, $http, ses
     $scope.logged = session.logged;
     $scope.user_id = $scope.logged ? session.user._id : null;
     $scope.$apply();
+    console.log('on', 'login');
   });
   // Search ip
   var ipInLikes = function(id, ip) {
