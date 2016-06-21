@@ -207,7 +207,8 @@ function MovieSwap () {
 			Movie.findOne({ '_id': id }, function(err, movie) {
 	    	if (err) throw err;
 				if (movie) {
-					if (movie.hasOwnProperty('requested')) {
+					// TODO: movie.hasOwnProperty('requested'), return FALSE ¿Why?
+					if (movie.requested) {
 						res.json({ error: true, message: 'Movie has a request'});
 					} else if (movie.owner_id === sess.user._id) {
 						res.json({ error: true, message: 'You are the owner of movie'});
