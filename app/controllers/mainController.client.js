@@ -15,7 +15,14 @@ movieswApp.config(['$locationProvider' ,'$routeProvider',
       }).
       when('/my', {
         templateUrl: '/views/my.html',
-        controller : 'myController'
+        controller : 'myController',
+        resolve: {
+          "check":function(session, $location) {
+            if (!session.logged) {
+              $location.path('/');
+            }
+          }
+        }
       }).
       otherwise('/');
   }
