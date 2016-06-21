@@ -2,9 +2,9 @@
     <div class="columns multiline">
       <div ng-repeat='movie in movies' class="column col-2">
           <section class="empty">
-            <span ng-show="movie.likes.length" class="empty-title text-ellipsis badge" data-badge="{{ movie.likes.length }}">{{ movie.title }} </span>
-            <p ng-hide="movie.likes.length" class="empty-title text-ellipsis">{{ movie.title }} </p>
-            <p class="empty-meta">{{ movie.year }}</p>
+            <p class="empty-title text-ellipsis">{{ movie.title }} </p>
+            <p ng-show="movie.likes.length" class="empty-meta badge" data-badge="{{ movie.likes.length }}">{{ movie.year }} </p>
+            <p ng-hide="movie.likes.length" class="empty-meta">{{ movie.year }} </p>
             <img class="img-responsive centered" ng-src="{{ movie.img }}">
             <button ng-hide="logged && (user_id !== movie.owner_id)" ng-click="setLike(movie._id)" class="btn"><i class="fa fa-heart"></i> I like it</button>
             <div ng-show="logged && (user_id !== movie.owner_id)" class="btn-group btn-group-block">

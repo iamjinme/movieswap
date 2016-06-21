@@ -200,6 +200,35 @@ function MovieSwap () {
 		}
 	}
 
+	this.setTradeIt = function(req, res) {
+		sess = req.session;
+		if (sess.user) {
+			var id = req.params.id;
+			Movie.findOne({ '_id': id }, function(err, movie) {
+	    	if (err) throw err;
+				if (movie) {
+					if (movie.hasOwnProperty('requested')) {
+						res.json({ error: true, message: 'Movie has a request'});
+					} else if (movie.owner_id === sess.user._id) {
+						res.json({ error: true, message: 'You are the owner of movie'});
+					} else {
+						movie.requested = {
+							accepted: false,
+							user_id: sess.user._id,
+							date: new Date()
+						};
+						movie.save();
+						res.json(movie);
+					}
+				} else {
+					res.json({ error: true, message: 'Movie not found'});
+				}
+	    });
+		} else {
+			res.json({ error: true, message: 'Unauthorized'});
+		}
+	}
+
 	this.getClicks = function (req, res) {
 		Users
 			.findOne({ 'github.id': req.user.github.id }, { '_id': false })
