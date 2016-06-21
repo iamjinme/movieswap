@@ -84,7 +84,7 @@ function MovieSwap () {
 	this.logOut = function(req, res) {
 		sess = req.session;
 		console.log(sess);
-		delete sess.user;
+		req.session.destroy();
 		res.json({logout: true});
 	}
 
