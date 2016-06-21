@@ -179,7 +179,6 @@ function MovieSwap () {
 	this.toggleLike = function(req, res) {
 		var ip = (req.headers['x-forwarded-for'] || req.connection.remoteAddress);
 		var id = req.params.id;
-		console.log(ip, id);
 		if (id) {
 			Movie.findOne({ '_id': id  }, function(err, movie) {
 				if (err) throw err;
@@ -191,7 +190,7 @@ function MovieSwap () {
 						movie.likes.push(ip);
 					}
 					movie.save();
-					res.json({ id: id, favorites: movie.likes.length });
+					res.json({ id: id, ip: ip, likes: movie.likes.length });
 				} else {
 					res.json({ error: true, message: 'Movie not found' });
 				}
