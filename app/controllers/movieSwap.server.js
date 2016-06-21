@@ -102,7 +102,7 @@ function MovieSwap () {
       if (!error && response.statusCode == 200) {
         var data = JSON.parse(body).Search;
 				// Filter without posters
-				if (data.lenght) {
+				if (data.length) {
 					data = data.filter(function(value, index) {
 	          return (value.Poster !== 'N/A');
 	        });

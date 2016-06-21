@@ -25,7 +25,7 @@ movieswApp.controller('myController', function myController($scope, $http, sessi
       dataType: 'json'
     }).done(function(json){
       if (json.error) {
-        console.log('error');
+        console.log(json.message);
       } else {
         $scope.collection.unshift(json);
         $scope.$apply();
