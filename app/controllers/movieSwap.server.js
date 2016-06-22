@@ -243,7 +243,7 @@ function MovieSwap () {
 				if (movie) {
 					if (isEmpty(movie.requested)) {
 						res.json({ error: true, message: 'Movie not has a request'});
-					} else if (movie.owner_id !== sess.user._id) {
+					} else if (movie.owner_id !== sess.user._id || movie.requested.user_id !== sess.user._id) {
 						res.json({ error: true, message: 'You are not the owner of movie'});
 					} else {
 						movie.requested = undefined;
@@ -253,6 +253,30 @@ function MovieSwap () {
 				} else {
 					res.json({ error: true, message: 'Movie not found'});
 				}
+			});
+		} else {
+			res.json({ error: true, message: 'Unauthorized'});
+		}
+	}
+
+	this.getTradeIn = function(req, res) {
+		sess = req.session;
+		if (sess.user) {
+			Movie.find({ owner_id: sess.user._id, requested: {$exists: true} }, function(err, movies) {
+				if (err) throw err;
+				res.json(movies);
+			});
+		} else {
+			res.json({ error: true, message: 'Unauthorized'});
+		}
+	}
+
+	this.getTradeOut = function(req, res) {
+		sess = req.session;
+		if (sess.user) {
+			Movie.find({ "requested.user_id": sess.user._id }, function(err, movies) {
+				if (err) throw err;
+				res.json(movies);
 			});
 		} else {
 			res.json({ error: true, message: 'Unauthorized'});

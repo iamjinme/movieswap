@@ -24,7 +24,6 @@ movieswApp.factory('rest', function($http){
   rest.putLike = function(movie) {
     var promise = $http.put('/api/likes/' + movie)
       .then(function(response) {
-        console.log(response);
         return response.data;
       });
     return promise;
