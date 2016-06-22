@@ -46,15 +46,14 @@ movieswApp.controller('myController', function myController($scope, $http, sessi
   }
   // Search movies
   $scope.getSearch = function() {
-    $('#btn_search').addClass('loading');
-    if (this.search) {
-      $http.get('/api/search/' + this.search)
-        .success(function(data) {
-          if (data.length) {
-            $scope.results = data;
-          }
-          $('#btn_search').removeClass('loading');
-        });
+    if ($scope.search) {
+      $('#btn_search').addClass('loading');
+      rest.getSearch($scope.search).then(function(data) {
+        if (data.length) {
+          $scope.results = data;
+        }
+        $('#btn_search').removeClass('loading');
+      })
     }
   }
   // Add movie

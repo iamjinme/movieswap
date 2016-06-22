@@ -2,6 +2,15 @@
 movieswApp.factory('rest', function($http){
   var rest = {};
 
+  // GET Search
+  rest.getSearch = function(search) {
+    var promise = $http.get('/api/search/' + search)
+      .then(function(response) {
+        return response.data;
+      });
+    return promise;
+  }
+
   // GET All Movies
   rest.getAllMovies = function() {
     var promise = $http.get('/api/movies')
