@@ -1,5 +1,5 @@
 // All Movies Controller
-movieswApp.controller('allController', function allController($scope, $http, session) {
+movieswApp.controller('allController', function allController($scope, $http, session, rest) {
   $scope.logged = session.logged;
   $scope.user_id = $scope.logged ? session.user._id : null;
   $scope.movies = [];
@@ -38,10 +38,10 @@ movieswApp.controller('allController', function allController($scope, $http, ses
       });
   }
   // Load Movies
-  $http.get('/api/movies')
-    .success(function(data) {
-      if (!data.error) {
-        $scope.movies = data;
-      }
-    });
+  rest.getAllMovies().then(function(data) {
+    console.log(data);
+    if (!data.error) {
+      $scope.movies = data
+    }
+  });
 });
