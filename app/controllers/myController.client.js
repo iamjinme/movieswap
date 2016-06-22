@@ -10,6 +10,8 @@ movieswApp.controller('myController', function myController($scope, $http, sessi
     $scope.trades = [];
     if ($scope.trade_in) {
       // Trades In
+      $('#btn_trade_in').addClass('btn-primary');
+      $('#btn_trade_out').removeClass('btn-primary');
       rest.getTradeIn().then(function(data) {
         if (!data.error) {
           $scope.trades = data;
@@ -17,6 +19,8 @@ movieswApp.controller('myController', function myController($scope, $http, sessi
       });
     } else {
       // Trades Out
+      $('#btn_trade_out').addClass('btn-primary');
+      $('#btn_trade_in').removeClass('btn-primary');
       rest.getTradeOut().then(function(data) {
         if (!data.error) {
           $scope.trades = data;
