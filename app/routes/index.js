@@ -25,6 +25,7 @@ module.exports = function (app) {
 	app.get('/api/movies/user', movieSwap.getMoviesUser);
 
 	app.get('/api/likes/:id', movieSwap.toggleLike);
-	app.get('/api/trades/:id', movieSwap.setTradeIt);
+	app.put('/api/trades/add/:id', movieSwap.putTradeIt);
+	app.put('/api/trades/del/:id', movieSwap.putUnTrade);
 
 };

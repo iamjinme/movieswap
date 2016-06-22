@@ -11,6 +11,10 @@ function MovieSwap () {
 
 	var max_results = 4;
 
+	function isEmpty(obj) {
+    return true && JSON.stringify(obj) === JSON.stringify({});
+	}
+
 	function validateEmail(email) {
 	    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	    return re.test(email);
@@ -200,7 +204,7 @@ function MovieSwap () {
 		}
 	}
 
-	this.setTradeIt = function(req, res) {
+	this.putTradeIt = function(req, res) {
 		sess = req.session;
 		if (sess.user) {
 			var id = req.params.id;
@@ -208,7 +212,7 @@ function MovieSwap () {
 	    	if (err) throw err;
 				if (movie) {
 					// TODO: movie.hasOwnProperty('requested'), return FALSE ¿Why?
-					if (movie.requested) {
+					if (!isEmpty(movie.requested)) {
 						res.json({ error: true, message: 'Movie has a request'});
 					} else if (movie.owner_id === sess.user._id) {
 						res.json({ error: true, message: 'You are the owner of movie'});
@@ -225,6 +229,31 @@ function MovieSwap () {
 					res.json({ error: true, message: 'Movie not found'});
 				}
 	    });
+		} else {
+			res.json({ error: true, message: 'Unauthorized'});
+		}
+	}
+
+	this.putUnTrade = function(req, res) {
+		sess = req.session;
+		if (sess.user) {
+			var id = req.params.id;
+			Movie.findOne({ '_id': id }, function(err, movie) {
+	    	if (err) throw err;
+				if (movie) {
+					if (isEmpty(movie.requested)) {
+						res.json({ error: true, message: 'Movie not has a request'});
+					} else if (movie.owner_id !== sess.user._id) {
+						res.json({ error: true, message: 'You are not the owner of movie'});
+					} else {
+						movie.requested = undefined;
+						movie.save();
+						res.json(movie);
+					}
+				} else {
+					res.json({ error: true, message: 'Movie not found'});
+				}
+			});
 		} else {
 			res.json({ error: true, message: 'Unauthorized'});
 		}
