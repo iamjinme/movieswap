@@ -8,7 +8,6 @@ movieswApp.controller('allController', function allController($scope, $http, ses
     $scope.logged = session.logged;
     $scope.user_id = $scope.logged ? session.user._id : null;
     $scope.$apply();
-    console.log('on', 'login');
   });
   // Search ip
   var ipInLikes = function(id, ip, i) {
@@ -21,12 +20,11 @@ movieswApp.controller('allController', function allController($scope, $http, ses
   }
   // I like it
   $scope.setLike = function(movie, pos) {
-    $http.get('/api/likes/' + movie)
-      .success(function(data) {
-        if (!data.error) {
-          ipInLikes(data.id, data.ip, pos);
-        }
-      });
+    rest.putLike(movie).then(function(data) {
+      if (!data.error) {
+        ipInLikes(data.id, data.ip, pos);
+      }
+    });
   }
   // I trade it
   $scope.setTrade = function(movie, pos) {
@@ -36,14 +34,6 @@ movieswApp.controller('allController', function allController($scope, $http, ses
         $scope.movies[pos] = data;
       }
     });
-    /*
-    $http.get('/api/trades/' + movie)
-      .success(function(data) {
-        if (!data.error) {
-          $scope.movies[pos] = data;
-        }
-      });
-    */
   }
   // Load Movies
   rest.getAllMovies().then(function(data) {
