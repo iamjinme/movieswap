@@ -3,9 +3,20 @@
     <div class="column col-md-4">
       <br />
       <div class="btn-group btn-group-block">
-        <button class="btn">Your trade request</button>
-        <button class="btn btn-primary">Trade request for you</button>
+        <button ng-click="changeTrade(false)" class="btn">Your trade request</button>
+        <button ng-click="changeTrade(true)" class="btn btn-primary">Trade request for you</button>
       </div>
+      <br />
+      <table class="table table-striped table-hover">
+      <tbody>
+        <tr ng-repeat="trade in trades" class="selected">
+            <td>{{ trade.title }}</td>
+            <td>{{ trade.year }}</td>
+            <td><i class="fa fa-check"></i></td>
+            <td><i class="fa fa-close"></i></td>
+        </tr>
+      </tbody>
+      </table>
       <h3 class="empty-title"><i class="fa fa-search"></i> Search movies</h3>
       <form>
         <div class="empty-action input-group">

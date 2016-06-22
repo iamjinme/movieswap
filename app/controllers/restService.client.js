@@ -29,5 +29,23 @@ movieswApp.factory('rest', function($http){
     return promise;
   }
 
+  // GET Trade In
+  rest.getTradeIn = function() {
+    var promise = $http.get('/api/trades/in')
+      .then(function(response) {
+        return response.data;
+      });
+    return promise;
+  }
+
+  // GET Trade Out
+  rest.getTradeOut = function() {
+    var promise = $http.get('/api/trades/out')
+      .then(function(response) {
+        return response.data;
+      });
+    return promise;
+  }
+
   return rest;
 });

@@ -1,8 +1,29 @@
 // Dashboard Controller
-movieswApp.controller('myController', function myController($scope, $http, session) {
-  $scope.images = [1, 2, 3, 4, 5, 6, 7, 8];
+movieswApp.controller('myController', function myController($scope, $http, session, rest) {
   $scope.results = [];
   $scope.collection = [];
+  $scope.trades = [];
+  $scope.trade_in = true;
+  // Change trade
+  $scope.changeTrade = function(trade_bool) {
+    $scope.trade_in = trade_bool;
+    $scope.trades = [];
+    if ($scope.trade_in) {
+      // Trades In
+      rest.getTradeIn().then(function(data) {
+        if (!data.error) {
+          $scope.trades = data;
+        }
+      });
+    } else {
+      // Trades Out
+      rest.getTradeOut().then(function(data) {
+        if (!data.error) {
+          $scope.trades = data;
+        }
+      });
+    }
+  }
   // Search movies
   $scope.getSearch = function() {
     $('#btn_search').addClass('loading');
