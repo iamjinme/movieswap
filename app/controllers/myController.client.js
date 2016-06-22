@@ -28,6 +28,22 @@ movieswApp.controller('myController', function myController($scope, $http, sessi
       });
     }
   }
+  // Cancel trade
+  $scope.cancelTrade = function(movie, pos) {
+    rest.delTrade(movie._id).then(function(data){
+      if (!data.error) {
+        $scope.trades.splice(pos, 1);
+      }
+    });
+  }
+  // Accept trade
+  $scope.acceptTrade = function(movie, pos) {
+    rest.acceptTrade(movie._id).then(function(data){
+      if (!data.error) {
+        $scope.trades.splice(pos, 1);
+      }
+    });
+  }
   // Search movies
   $scope.getSearch = function() {
     $('#btn_search').addClass('loading');

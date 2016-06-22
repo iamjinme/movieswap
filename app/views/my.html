@@ -9,11 +9,12 @@
       <br />
       <table class="table table-striped table-hover">
       <tbody>
-        <tr ng-repeat="trade in trades" class="selected">
-            <td>{{ trade.title }}</td>
-            <td>{{ trade.year }}</td>
-            <td><i class="fa fa-check"></i></td>
-            <td><i class="fa fa-close"></i></td>
+        <tr ng-repeat="trade in trades">
+          <td>{{ trade.title }}</td>
+          <td>{{ trade.year }}</td>
+          <td ng-show="trade_in"><a ng-click="acceptTrade(trade, $index)" class="btn btn-link"><i class="fa fa-check"></i> Sure</a></td>
+          <td ng-show="trade_in"><a ng-click="cancelTrade(trade, $index)" class="btn btn-link"><i class="fa fa-close"></i> No way</a></td>
+          <td ng-hide="trade_in"><a ng-click="cancelTrade(trade, $index)" class="btn btn-link"><i class="fa fa-close"></i> Cancel</a></td>
         </tr>
       </tbody>
       </table>

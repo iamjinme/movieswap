@@ -11,9 +11,27 @@ movieswApp.factory('rest', function($http){
     return promise;
   };
 
-  // PUT Trade Movie
+  // PUT Add Trade Movie
   rest.putTrade = function(movie) {
     var promise = $http.put('/api/trades/add/' + movie)
+      .then(function(response) {
+        return response.data;
+      });
+    return promise;
+  }
+
+  // PUT Cancel/Delete Trade Movie
+  rest.delTrade = function(movie) {
+    var promise = $http.put('/api/trades/del/' + movie)
+      .then(function(response) {
+        return response.data;
+      });
+    return promise;
+  }
+
+  // PUT Accept Trade Movie
+  rest.acceptTrade = function(movie) {
+    var promise = $http.put('/api/trades/accept/' + movie)
       .then(function(response) {
         return response.data;
       });
