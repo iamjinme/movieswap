@@ -3,7 +3,6 @@ var movieswApp = angular.module('movieswApp', ['ngRoute']);
 // Define the configuration of app
 movieswApp.config(['$locationProvider' ,'$routeProvider',
   function config($locationProvider, $routeProvider) {
-    console.log('app-config');
     // Define routes
     $routeProvider.
       when('/', {
@@ -28,7 +27,6 @@ movieswApp.config(['$locationProvider' ,'$routeProvider',
       when('/config', {
         templateUrl: '/views/config.html',
         controller : 'configController'
-        /*
         resolve: {
           "check":function(session, $location) {
             if (!session.logged) {
@@ -36,21 +34,11 @@ movieswApp.config(['$locationProvider' ,'$routeProvider',
             }
           }
         }
-        */
       }).
       otherwise('/');
   }
 ]);
-movieswApp.run(function() {
-  console.log('app-run');
-});
 // Define the main controller on the app module
 movieswApp.controller('mainController', function mainController($scope, $http, session) {
-  $scope.times = 0;
-  $scope.addClick = function() {
-    $scope.times++;
-  }
-  $scope.resetClick = function() {
-    $scope.times = 0;
-  }
+  // Any functions
 });

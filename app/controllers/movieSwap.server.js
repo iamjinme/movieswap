@@ -56,7 +56,6 @@ function MovieSwap () {
 
 	this.logIn = function(req, res) {
 		sess = req.session;
-		console.log(sess);
 		if (!req.body.email) {
 			res.json({error: true, message: 'What is your email?'});
 		} else if (!validateEmail(req.body.email)) {
@@ -87,7 +86,6 @@ function MovieSwap () {
 
 	this.logOut = function(req, res) {
 		sess = req.session;
-		console.log(sess);
 		req.session.destroy();
 		res.json({logout: true});
 	}
@@ -95,7 +93,6 @@ function MovieSwap () {
 	this.initApp = function(req, res) {
 		sess = req.session;
 		sess.count = (sess.count || 0) + 1;
-		console.log(req.session);
 		res.sendFile(path + '/public/index.html');
 	}
 
