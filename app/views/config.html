@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="columns">
+    <div class="column col-md-6 centered">
+      <form>
+        <!-- form input control -->
+        <div class="form-group">
+          <label class="form-label" for="name">Name</label>
+          <input class="form-input" type="text" name="name" ng-model="name" placeholder="Your name" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="city">City</label>
+          <input class="form-input" type="text" name="city" ng-model="city" placeholder="Where do you live?" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="state">State</label>
+          <input class="form-input" type="text" name="state" ng-model="state" placeholder="It's not civil!" />
+        </div>
+        <!-- form radio control -->
+        <div class="form-group">
+          <label class="form-label">Gender</label>
+          <label class="form-radio">
+            <input type="radio" name="gender" />
+            <i class="form-icon"></i> Male
+          </label>
+          <label class="form-radio">
+            <input type="radio" name="gender" />
+            <i class="form-icon"></i> Female
+          </label>
+        </div>
+        <!-- form switch control -->
+        <div class="form-group">
+          <label class="form-switch">
+            <input type="checkbox" />
+            <i class="form-icon"></i> Send me emails with notifications
+          </label>
+        </div>
+        <!-- form buttons -->
+        <div class="form-group">
+          <button class="btn btn-primary" type="submit">Save</button>
+          <button class="btn btn-link" type="reset">Cancel</button>
+        </div>
+        <!-- form passwords -->
+        <div class="form-group">
+          <label class="form-label" for="password">Password</label>
+          <input class="form-input" type="password" name="password" ng-model="password" placeholder="Actual password" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="new_password">New password</label>
+          <input class="form-input" type="password" name="new_password" ng-model="new_password" placeholder="Set your new password" />
+        </div>
+        <!-- form buttons -->
+        <div class="form-group">
+          <button class="btn btn-primary" type="submit">Change password</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

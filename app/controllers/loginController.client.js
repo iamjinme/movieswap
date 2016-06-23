@@ -17,7 +17,7 @@ movieswApp.controller('loginController', function loginController($scope, $http,
     } else {
       $(this).parent().addClass('hide');
     }
-  });  
+  });
   // Login button (navbar)
   $('#btn_login').click(function() {
     $scope.login.message = '';
@@ -25,7 +25,7 @@ movieswApp.controller('loginController', function loginController($scope, $http,
     $scope.login.is_login = true;
     $scope.login.title = 'Login';
     $scope.login.subtitle = 'Sign Up';
-    $('.modal').addClass('active');
+    $('#login_modal').addClass('active');
     $scope.$apply();
   });
   // Sign Up button (navbar)
@@ -35,7 +35,7 @@ movieswApp.controller('loginController', function loginController($scope, $http,
     $scope.login.is_login = false;
     $scope.login.title = 'Sign Up';
     $scope.login.subtitle = 'Login';
-    $('.modal').addClass('active');
+    $('#login_modal').addClass('active');
     $scope.$apply();
   });
   // Close button modal

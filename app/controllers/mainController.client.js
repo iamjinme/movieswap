@@ -25,6 +25,19 @@ movieswApp.config(['$locationProvider' ,'$routeProvider',
           }
         }
       }).
+      when('/config', {
+        templateUrl: '/views/config.html',
+        controller : 'configController'
+        /*
+        resolve: {
+          "check":function(session, $location) {
+            if (!session.logged) {
+              $location.path('/');
+            }
+          }
+        }
+        */
+      }).
       otherwise('/');
   }
 ]);
