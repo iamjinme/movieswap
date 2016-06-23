@@ -337,6 +337,24 @@ function MovieSwap () {
 		}
 	};
 
+	this.changePassword = function(req, res) {
+		sess = req.session;
+		if (req.body._id === sess.user._id) {
+			User.findOne({ '_id': req.body._id, 'password': req.body.password }, function(err, doc) {
+				if (err) throw err;
+				if (doc) {
+					if (req.body.new_password) doc.password = req.body.new_password;
+					doc.save();
+					res.json({ error: false, message: 'Password changed' });
+				} else {
+					res.json({ error: true, message: 'Password is incorrect' });
+				}
+			});
+		} else {
+			res.json({ error: true, message: 'Unauthorized'});
+		}
+	}
+
 	this.getClicks = function (req, res) {
 		Users
 			.findOne({ 'github.id': req.user.github.id }, { '_id': false })
