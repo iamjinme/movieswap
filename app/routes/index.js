@@ -17,7 +17,7 @@ module.exports = function (app) {
 
 	app.get('/api/logout', movieSwap.logOut);
 
-	app.post('/api/user', movieSwap.saveUser);
+	app.post('/api/users', movieSwap.saveUser);
 
 	app.get('/api/search/:movie', movieSwap.getSearch);
 

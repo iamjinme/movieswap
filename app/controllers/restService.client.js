@@ -2,6 +2,15 @@
 movieswApp.factory('rest', function($http){
   var rest = {};
 
+  // POST user profile
+  rest.postUser = function(user) {
+    var promise = $http.post('/api/users', user)
+      .then(function(response) {
+        return response.data;
+      });
+    return promise;
+  }
+
   // POST movie user
   rest.postMovie = function(movie) {
     var promise = $http.post('/api/movies', movie)

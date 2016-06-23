@@ -1,6 +1,11 @@
 <div class="container">
   <div class="columns">
     <div class="column col-md-6 centered">
+      <div id="message" class="toast hide">
+        <button class="btn btn-clear float-right"></button>
+        <span id="text_message">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
+      </div>
+      <br />
       <form>
         <!-- form input control -->
         <div class="form-group">
@@ -19,18 +24,18 @@
         <div class="form-group">
           <label class="form-label">Gender</label>
           <label class="form-radio">
-            <input type="radio" name="gender" />
+            <input type="radio" value="1" ng-model="user.gender" name="user.gender" />
             <i class="form-icon"></i> Male
           </label>
           <label class="form-radio">
-            <input type="radio" name="gender" />
+            <input type="radio" value="2" ng-model="user.gender" name="user.gender" />
             <i class="form-icon"></i> Female
           </label>
         </div>
         <!-- form switch control -->
         <div class="form-group">
           <label class="form-switch">
-            <input type="checkbox" />
+            <input type="checkbox" ng-model="user.notify" name="user.notify" />
             <i class="form-icon"></i> Send me emails with notifications
           </label>
         </div>

@@ -317,15 +317,14 @@ function MovieSwap () {
 			User.findOne({ '_id': req.body._id, 'password': req.body.password }, function(err, doc) {
 				if (err) throw err;
 				if (doc) {
-					if (req.body.city) {
-						doc.city = req.body.city;
-						console.log('city');
-					} else if (req.body.state) {
-						doc.state = req.body.state;
-						console.log('state');
-					} else if (req.body.name) {
-						doc.name = req.body.name;
-						console.log('name');
+					if (req.body.city) doc.city = req.body.city;
+					if (req.body.state) doc.state = req.body.state;
+					if (req.body.name) doc.name = req.body.name;
+					if (req.body.gender) doc.gender = req.body.gender;
+					if (req.body.notify) {
+						doc.notify = true;
+					} else {
+						doc.notify = false;
 					}
 					doc.save();
 					res.json(doc);
