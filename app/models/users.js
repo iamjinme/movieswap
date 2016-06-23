@@ -10,6 +10,8 @@ var User = new Schema({
 	date: Date,
 	city: String,
 	state: String,
+	gender: Number,
+	notify: Boolean,
 	movies: Array
 });
 
