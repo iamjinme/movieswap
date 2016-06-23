@@ -311,6 +311,33 @@ function MovieSwap () {
 		}
 	}
 
+	this.saveUser = function(req, res) {
+		sess = req.session;
+		if (req.body._id === sess.user._id) {
+			User.findOne({ '_id': req.body._id, 'password': req.body.password }, function(err, doc) {
+				if (err) throw err;
+				if (doc) {
+					if (req.body.city) {
+						doc.city = req.body.city;
+						console.log('city');
+					} else if (req.body.state) {
+						doc.state = req.body.state;
+						console.log('state');
+					} else if (req.body.name) {
+						doc.name = req.body.name;
+						console.log('name');
+					}
+					doc.save();
+					res.json(doc);
+				} else {
+					res.json({ error: true, message: 'User not found' });
+				}
+			});
+		} else {
+			res.json({ error: true, message: 'Unauthorized'});
+		}
+	};
+
 	this.getClicks = function (req, res) {
 		Users
 			.findOne({ 'github.id': req.user.github.id }, { '_id': false })

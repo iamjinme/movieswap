@@ -5,15 +5,15 @@
         <!-- form input control -->
         <div class="form-group">
           <label class="form-label" for="name">Name</label>
-          <input class="form-input" type="text" name="name" ng-model="name" placeholder="Your name" />
+          <input class="form-input" type="text" name="name" ng-model="user.name" placeholder="Your name" />
         </div>
         <div class="form-group">
           <label class="form-label" for="city">City</label>
-          <input class="form-input" type="text" name="city" ng-model="city" placeholder="Where do you live?" />
+          <input class="form-input" type="text" name="city" ng-model="user.city" placeholder="Where do you live?" />
         </div>
         <div class="form-group">
           <label class="form-label" for="state">State</label>
-          <input class="form-input" type="text" name="state" ng-model="state" placeholder="It's not civil!" />
+          <input class="form-input" type="text" name="state" ng-model="user.state" placeholder="It's not civil!" />
         </div>
         <!-- form radio control -->
         <div class="form-group">
@@ -36,7 +36,7 @@
         </div>
         <!-- form buttons -->
         <div class="form-group">
-          <button class="btn btn-primary" type="submit">Save</button>
+          <button class="btn btn-primary" ng-click="saveConfig()" type="submit">Save</button>
           <button class="btn btn-link" type="reset">Cancel</button>
         </div>
         <!-- form passwords -->
