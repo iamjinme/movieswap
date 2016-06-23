@@ -343,9 +343,13 @@ function MovieSwap () {
 			User.findOne({ '_id': req.body._id, 'password': req.body.password }, function(err, doc) {
 				if (err) throw err;
 				if (doc) {
-					if (req.body.new_password) doc.password = req.body.new_password;
-					doc.save();
-					res.json({ error: false, message: 'Password changed' });
+					if (req.body.new_password) {
+						doc.password = req.body.new_password;
+						doc.save();
+						res.json({ error: false, message: 'Password changed' });
+					} else {
+						res.json({ error: true, message: 'New password is required' });
+					}
 				} else {
 					res.json({ error: true, message: 'Password is incorrect' });
 				}

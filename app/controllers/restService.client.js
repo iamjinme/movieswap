@@ -2,6 +2,15 @@
 movieswApp.factory('rest', function($http){
   var rest = {};
 
+  // POST change password
+  rest.postPassword = function(user) {
+    var promise = $http.post('/api/users/password', user)
+      .then(function(response) {
+        return response.data;
+      });
+    return promise;
+  }
+
   // POST user profile
   rest.postUser = function(user) {
     var promise = $http.post('/api/users', user)

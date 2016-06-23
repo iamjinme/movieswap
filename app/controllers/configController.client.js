@@ -22,6 +22,18 @@ movieswApp.controller('configController', function configController($scope, $htt
   }
   // Change Password
   $scope.changePassword = function() {
-    console.log('change-password');
+    var password = {
+      _id: session.user._id,
+      password: $scope.password.hashCode(),
+      new_password: $scope.new_password.hashCode()
+    }
+    rest.postPassword(password).then(function(data) {
+      $('#text_message').html(data.message);
+      if (!data.error) {
+        $('#message').removeClass('hide').removeClass('toast-danger').addClass('toast-primary');
+      } else {
+        $('#message').removeClass('hide').removeClass('toast-primary').addClass('toast-danger');
+      }
+    });
   }
 });
