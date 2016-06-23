@@ -29,7 +29,6 @@ movieswApp.controller('allController', function allController($scope, $http, ses
   // I trade it
   $scope.setTrade = function(movie, pos) {
     rest.putTrade(movie).then(function(data) {
-      console.log(data);
       if (!data.error) {
         $scope.movies[pos] = data;
       }

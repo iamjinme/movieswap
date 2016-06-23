@@ -2,6 +2,24 @@
 movieswApp.factory('rest', function($http){
   var rest = {};
 
+  // POST movie user
+  rest.postMovie = function(movie) {
+    var promise = $http.post('/api/movies', movie)
+      .then(function(response) {
+        return response.data;
+      });
+    return promise;
+  }
+
+  // DELETE movie user
+  rest.delMovie = function(movie) {
+    var promise = $http.delete('/api/movies/' + movie)
+      .then(function(response) {
+        return response.data;
+      });
+    return promise;
+  }
+
   // GET Search
   rest.getSearch = function(search) {
     var promise = $http.get('/api/search/' + search)

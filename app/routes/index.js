@@ -21,7 +21,7 @@ module.exports = function (app) {
 
 	app.post('/api/movies', movieSwap.addMovie);
 	app.get('/api/movies', movieSwap.getMoviesAll);
-	app.delete('/api/movies', movieSwap.delMovie);
+	app.delete('/api/movies/:id', movieSwap.delMovie);
 	app.get('/api/movies/user', movieSwap.getMoviesUser);
 
 	app.put('/api/likes/:id', movieSwap.toggleLike);

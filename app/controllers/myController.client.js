@@ -38,9 +38,18 @@ movieswApp.controller('myController', function myController($scope, $http, sessi
   }
   // Accept trade
   $scope.acceptTrade = function(movie, pos) {
+    // Position movie
+    function thatMovie(element, index) {
+      return element._id === movie._id;
+    }
+    // Call API
     rest.acceptTrade(movie._id).then(function(data){
       if (!data.error) {
         $scope.trades.splice(pos, 1);
+        pos = $scope.collection.findIndex(thatMovie);
+        if (pos >= 0) {
+          $scope.collection.splice(pos, 1);
+        }
       }
     });
   }
@@ -58,43 +67,33 @@ movieswApp.controller('myController', function myController($scope, $http, sessi
   }
   // Add movie
   $scope.addMovie = function(movie) {
-    $.ajax({
-      url: '/api/movies',
-      type: 'POST',
-      data: movie,
-      dataType: 'json'
-    }).done(function(json){
-      if (json.error) {
-        console.log(json.message);
-      } else {
-        $scope.collection.unshift(json);
-        $scope.$apply();
-      }
-    });
-  }
-  // Remove movie
-  $scope.removeMovie = function(movie) {
     // Position movie
     function thatMovie(element, index) {
       return element._id === movie._id;
     }
     // Call API
-    $.ajax({
-      url: '/api/movies',
-      type: 'DELETE',
-      data: movie,
-      dataType: 'json'
-    }).done(function(json){
-      if (json.error) {
-        console.log('error');
+    rest.postMovie(movie).then(function(data) {
+      if (data.error) {
+        console.log(data.message);
       } else {
+        movie = data;
         var pos = $scope.collection.findIndex(thatMovie);
-        if (pos) {
-          $scope.collection.splice(pos, 1);
-          $scope.$apply();
+        if (pos < 0) {
+          $scope.collection.unshift(movie);
         }
       }
-    });
+    })
+  }
+  // Remove movie
+  $scope.removeMovie = function(movie, pos) {
+    // Call API
+    rest.delMovie(movie._id).then(function(data) {
+      if (data.error) {
+        console.log(data.message);
+      } else {
+        $scope.collection.splice(pos, 1);
+      }
+    })
   }
   // Load collection
   $http.get('/api/movies/user')
