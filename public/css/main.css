@@ -87,3 +87,28 @@
 .btn-add:before {
   font-size: 2rem;
 }
+
+.container a {
+  text-decoration: none;
+  background: #34495E;
+  color: #fff;
+  padding: 5px 10px 5px 10px;
+  border-radius: 50px;
+  font-weight: bold;
+}
+
+.container a:hover {
+  color: #fff;
+}
+
+.big .fa-users {
+  color: #FBC02D;
+}
+
+.big .fa-ticket {
+  color: #795548;
+}
+
+.big .fa-heart {
+  color: #F44336;
+}
