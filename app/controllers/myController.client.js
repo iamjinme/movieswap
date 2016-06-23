@@ -96,10 +96,9 @@ movieswApp.controller('myController', function myController($scope, $http, sessi
     })
   }
   // Load collection
-  $http.get('/api/movies/user')
-    .success(function(data) {
-      if (!data.error) {
-        $scope.collection = data;
-      }
-    });
+  rest.getUserMovies().then(function(data) {
+    if (!data.error) {
+      $scope.collection = data;
+    }
+  });
 });
